@@ -1,0 +1,21 @@
+nav ul li
+{
+    position:relative;
+}
+
+nav ul li::before
+{
+    content:'';
+    background-color: blueviolet;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    height: 3px;
+    width: 0%;
+    transition: width 700ms ease-out;
+}
+
+nav ul li:hover::before
+{
+    width: 100%;
+}
