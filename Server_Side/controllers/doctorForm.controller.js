@@ -11,7 +11,6 @@ export const createDoctor = async (req, res) => {
             certificate: files?.certificate ? files.certificate[0].buffer : null,
         };
 
-
         const doctor = new Doctor(doctorData);
 
 
@@ -26,7 +25,6 @@ export const createDoctor = async (req, res) => {
 
         res.status(400).json({
             message: 'Error creating doctor',
-            error: error.message,
         });
     }
 };
