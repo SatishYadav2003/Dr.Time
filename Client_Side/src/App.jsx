@@ -1,19 +1,13 @@
 import React from "react";
-import DoctorFormPage from "../src/components/DoctorFormPage"
-import { Toaster } from 'react-hot-toast';
-// import PathologistFormPage from "./components/PathologistFormPage";
-// import PharmaceuticalFormPage from "./components/PharmaceuticalFormPage";
-
-
+import { Toaster } from "react-hot-toast";
+import PharmacyForm from "./pharmacy/PharmacyForm";
 
 function App() {
   return (
     <>
       <div>
-      <DoctorFormPage/>
-      {/* <PathologistFormPage/> */}
-      {/* <PharmaceuticalFormPage/> */}
-      <Toaster/>
+        <PharmacyForm/>
+        <Toaster />
       </div>
     </>
   );

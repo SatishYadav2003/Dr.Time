@@ -1,17 +1,15 @@
-import express from 'express';
 import connectDB from './config/connection.js';
-import doctorRoutes from './routers/doctorForm.router.js';
-import bodyParser from 'body-parser';
+import pharmacyRoutes from "./routers/pharmacyForm.router.js"
+import bodyParser from "body-parser"
 import cors from "cors"
-import dotenv from "dotenv"
-
-dotenv.config();
+import express from "express";
 
 
 const app = express();
-const PORT = process.env.PORT || 5173;
 
 
+// Now you can use these imported modules as needed                      
+const PORT = process.env.PORT || 5010;
 app.use(bodyParser.json());
 app.use(cors())
 
@@ -21,7 +19,8 @@ connectDB();
 
 
 
-app.use('/doctors_signup', doctorRoutes);
+// app.use('/doctors_signup', doctorRoutes);
+app.use('/api/pharmacies', pharmacyRoutes);
 
 
 app.listen(PORT, () => {

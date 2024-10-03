@@ -2,10 +2,10 @@ import React from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-// import Navbar from './components/Navbar';
-// import Footer from './components/Footer';
+import Navbar from "../../home/components/Navbar";
+import Footer from "../../home/components/Footer";
 
-function DoctorFormPage() {
+function DoctorForm() {
   const [formData, setFormData] = useState({
     fname: "",
     lname: "",
@@ -20,7 +20,6 @@ function DoctorFormPage() {
     hospitalAffiliationName: "",
     hospitalAffiliationAddress: "",
     qualification: "",
-    experience: "",
     institution: "",
     alternateAddress: "",
     emergencyContact: "",
@@ -47,6 +46,9 @@ function DoctorFormPage() {
       "medLicenseNoExpiry",
       "hospitalAffiliationName",
       "hospitalAffiliationAddress",
+      "alternateAddress",
+      " qualification",
+      "experience",
     ];
 
     for (let field of requiredFields) {
@@ -98,22 +100,32 @@ function DoctorFormPage() {
     }
 
     try {
-      await axios.post("http://localhost:5000/doctors_signup", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:8080/api/doctors",
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response);
+
       toast.success("Sign Up successfully");
     } catch (error) {
+      console.log(error);
       toast.error("Error submitting form: " + error.response.data.message);
     }
   };
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
 
-      <div className="w-11/12 mx-auto my-2">
+      <div className="w-11/12 mx-auto my-10">
+        <h1 className="text-center font-bold text-4xl">
+          Doctor Application Form
+        </h1>
         <div className="hero bg-base-50 p-3 lg:p-8 rounded-lg shadow-lg">
           <div className="hero-content grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             <div className="text-center lg:text-left">
@@ -449,6 +461,11 @@ function DoctorFormPage() {
                       value={formData.qualification}
                       onChange={handleChange}
                     />
+                    {isSubmitted && formData.qualification === "" && (
+                      <p className="text-red-500 text-xs mt-2">
+                        Please fill out this field.
+                      </p>
+                    )}
                   </div>
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                     <label
@@ -476,6 +493,11 @@ function DoctorFormPage() {
                           <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                         </svg>
                       </div>
+                      {isSubmitted && formData.experience === "" && (
+                        <p className="text-red-500 text-xs mt-2">
+                          Please fill out this field.
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -528,6 +550,11 @@ function DoctorFormPage() {
                       value={formData.alternateAddress}
                       onChange={handleChange}
                     />
+                    {isSubmitted && formData.alternateAddress === "" && (
+                      <p className="text-red-500 text-xs mb-2">
+                        Please fill out this field.
+                      </p>
+                    )}
                   </div>
 
                   <div className="w-full px-3">
@@ -636,9 +663,9 @@ function DoctorFormPage() {
         </div>
       </div>
 
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
 
-export default DoctorFormPage;
+export default DoctorForm;
